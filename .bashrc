@@ -4,6 +4,12 @@
 
 #PATH export
 export PATH=~/.local/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64
+export PATH="$PATH:~/flutter/bin"
+export PATH="$PATH:~/rerun"
+
+#Evnrionment Variables for passwords/API's
+source ~/.trails_env_vars
 
 # If not running interactively, don't do anything
 case $- in
@@ -14,6 +20,8 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
+
+alias python=python3
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -98,6 +106,11 @@ alias pls='ptls'
 alias pla='ptls -a'
 alias pwd='ptpwd'
 
+#postgres aliases
+#alias initdb='/usr/lib/postgresql/13/bin/initdb'
+#alias postgres='/usr/lib/postgresql/13/bin/postgres'
+
+
 #File path changer alias
 wto() {
   pathto=`wslpath -a "$1"`
@@ -106,6 +119,17 @@ wto() {
 
 #git status alias
 alias gs='git status'
+alias gcb='git checkout -b'
+alias gc='git checkout'
+
+#docker alias
+alias dcb='docker-compose run backend'
+alias up='docker-compose up'
+alias down='docker-compose down'
+alias mtest='docker-compose run backend bundle exec guard'
+alias mcons='docker-compose run backend bundle exec rails c'
+alias mmigrate='docker-compose run backend rake db:migrate RAILS_ENV=test'
+alias mdebug='docker-compose run --service-ports backend'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -137,3 +161,23 @@ parse_git_branch() {
 }
 
 PS1='\[\e[0;38;5;80m\]\@\[\e[0;38;5;245m\]┬\[\e[0;38;5;204m\]\u \[\e[0;38;5;245m\]> \[\e[0;38;5;227m\]\w\[\e[0;38;5;80m\]$(parse_git_branch)\n        \[\e[0;38;5;245m\]└ \[\e[0m\]\$ \[\e[0m\]'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$HOME/.cargo/bin:$PATH
+alias less=bat
+
+if [[ "os2" = $(hostname -s) ]]; then
+#updated gcc, gdb, and libs
+
+#updated ruby
+
+#updated python
+
+#updated git
+alias ls="colorls --gs"
+fi
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
